@@ -2,7 +2,6 @@ const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const box = document.querySelector(".buttons");
 
-// How close the mouse can get before it runs (px)
 const DODGE_DISTANCE = 60;
 
 function clamp(n, min, max) {
@@ -13,32 +12,28 @@ function moveYesButton() {
   const maxX = box.clientWidth - yesBtn.offsetWidth;
   const maxY = box.clientHeight - yesBtn.offsetHeight;
 
-  // Random position inside the box
   const x = Math.random() * maxX;
   const y = Math.random() * maxY;
 
-  // Use transform for centering only at start; afterwards keep it normal
   yesBtn.style.transform = "none";
   yesBtn.style.left = `${x}px`;
   yesBtn.style.top = `${y}px`;
 }
 
-// Runs away as soon as you enter it
+
 yesBtn.addEventListener("mouseenter", moveYesButton);
 
-// If user tries to click, escape instantly
 yesBtn.addEventListener("mousedown", (e) => {
   e.preventDefault();
   moveYesButton();
 });
 
-// Mobile: if they try to tap
 yesBtn.addEventListener("touchstart", (e) => {
   e.preventDefault();
   moveYesButton();
 }, { passive: false });
 
-// Bonus: runs away when your mouse gets close (smooth + harder to catch)
+
 box.addEventListener("mousemove", (e) => {
   const boxRect = box.getBoundingClientRect();
   const btnRect = yesBtn.getBoundingClientRect();
@@ -57,7 +52,6 @@ box.addEventListener("mousemove", (e) => {
     const maxX = box.clientWidth - yesBtn.offsetWidth;
     const maxY = box.clientHeight - yesBtn.offsetHeight;
 
-    // Push opposite direction from mouse
     const pushX = (-dx / (dist || 1)) * 90;
     const pushY = (-dy / (dist || 1)) * 60;
 
@@ -92,3 +86,4 @@ noBtn.addEventListener("click", () => {
     </div>
   `;
 });
+
